@@ -19,23 +19,6 @@ s.anuj, j.schoenwaelder\}@jacobs-university.de}
 
 \maketitle
 
-
-\begin{abstract}
-Telemetry is an important function of the Internet of Things as it
-is being developed and deployed today. Of particular interest within
-this area are energy monitoring services. In this paper we describe
-WattsApp, a social telemetry gathering and comparison platform, which
-was built as a demonstrator that integrates technologies from embedded
-systems to mobile applications. We used the SNMP protocol stack developed
-for the Contiki embedded operating system to retrieve telemetry information
-from a hardware interface that reads data from S0 meters (e.g., power
-meters, fluid meters). A web interface and an Android mobile application
-lets users view this data. To ensure privacy of users' data, it is
-only stored at users' own premises and all communication takes place
-over encrypted connections. This paper provides an overview of the
-implementation of WattsApp. 
-\end{abstract}
-
 \begin{abstract}
 Telemetry is an important function of the Internet of Things as it
 is being developed and deployed today. Of particular interest within
@@ -378,22 +361,6 @@ and it can also be shared on Facebook. }
 \label{fig:website-power-consumption}
 \end{figure}
 
-
-\begin{figure}[t]
-\begin{centering}
-\includegraphics[scale=0.93]{images/signal-strength} 
-\par\end{centering}
-
-\caption{A typical graph output on the website client interface. Instead of
-energy consumption this graph plots the radio signal strength of the
-connection to an exporter named Wattsbox. Annotations can be added
-to these graphs and it can also be shared on Facebook. }
-
-
-\label{fig:website-signal-strength}
-\end{figure}
-
-
 The gatekeeper web service, which resides on the cloud server (as
 in Figure \ref{fig:wattsapp}) performs the function of authenticating
 users and performing access control to data from collectors. This
@@ -430,6 +397,20 @@ is meant to provide data to users on the move.
 
 
 \subsection{Web Application}
+
+\begin{figure}[t]
+\begin{centering}
+\includegraphics[scale=0.93]{images/signal-strength} 
+\par\end{centering}
+
+\caption{A typical graph output on the website client interface. Instead of
+energy consumption this graph plots the radio signal strength of the
+connection to an exporter named Wattsbox. Annotations can be added
+to these graphs and it can also be shared on Facebook. }
+
+
+\label{fig:website-signal-strength}
+\end{figure}
 
 The web application%
 \footnote{http://www.wattsapp.net%
