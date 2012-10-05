@@ -1,41 +1,41 @@
-\documentclass[10pt, conference, compsocconf, english]{IEEEtran}
-%\renewcommand{\ttdefault}{cmtt}
-%\usepackage[T1]{fontenc}
-%\usepackage[latin9]{inputenc}
+\documentclass[10pt, conference, compsocconf]{IEEEtran}
+
 \usepackage{url}
 \usepackage{graphicx}
 
-%\makeatletter
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
 
-%\usepackage{times}
-%\usepackage{babel}
-%\usepackage[none]{hyphenat}
-
-\renewcommand{\ttdefault}{cmtt}
-
-
-\usepackage{babel}
-
-
-
-
-\makeatother
 
 \begin{document}
-\author{
-\IEEEauthorblockN{\\\\\\\\\\\\}
-}
-
-%\author{
-%\IEEEauthorblockN{Vaibhav Bajpai, Vitali Bashko, Catalin David, Siarhei Kuryla, Vladislav Perelman, Johannes Schauer, \\Nikolay Melnikov, Anuj Sehgal, J\"{u}rgen Sch\"{o}nw\"{a}lder\\}
-%\IEEEauthorblockA{Computer Science, Jacobs University Bremen, Campus Ring 1, 28759 Bremen, Germany
-%\\\{v.bajpai, v.bashko, c.david, s.kuryla, v.perelman, j.schauer, \\n.melnikov,
-%s.anuj, j.schoenwaelder\}@jacobs-university.de}
-%}
 
 \title{Design and Prototype Implementation of the WattsApp Telemetry Platform}
+\author{
+\IEEEauthorblockN{Vaibhav Bajpai, Vitali Bashko, Catalin David, Siarhei Kuryla, Vladislav Perelman, Johannes Schauer, \\Nikolay Melnikov, Anuj Sehgal, J\"{u}rgen Sch\"{o}nw\"{a}lder\\}
+\IEEEauthorblockA{Computer Science, Jacobs University Bremen, Campus Ring 1, 28759 Bremen, Germany
+\\\{v.bajpai, v.bashko, c.david, s.kuryla, v.perelman, j.schauer, \\n.melnikov,
+s.anuj, j.schoenwaelder\}@jacobs-university.de}
+}
 
 \maketitle
+
+
+\begin{abstract}
+Telemetry is an important function of the Internet of Things as it
+is being developed and deployed today. Of particular interest within
+this area are energy monitoring services. In this paper we describe
+WattsApp, a social telemetry gathering and comparison platform, which
+was built as a demonstrator that integrates technologies from embedded
+systems to mobile applications. We used the SNMP protocol stack developed
+for the Contiki embedded operating system to retrieve telemetry information
+from a hardware interface that reads data from S0 meters (e.g., power
+meters, fluid meters). A web interface and an Android mobile application
+lets users view this data. To ensure privacy of users' data, it is
+only stored at users' own premises and all communication takes place
+over encrypted connections. This paper provides an overview of the
+implementation of WattsApp. 
+\end{abstract}
+
 \begin{abstract}
 Telemetry is an important function of the Internet of Things as it
 is being developed and deployed today. Of particular interest within
@@ -208,19 +208,6 @@ supply and causes the current across the output lines to rise up between
 example, the S0 electricity meter we use causes a current pulse between
 10-27mA once 1 kWh of energy has been consumed.
 
-\begin{figure}[t]
-\begin{centering}
-\includegraphics[scale=0.4]{images/s0-meter} 
-\par\end{centering}
-
-\caption{The S0 interface for the electricity meter along with the AVR Raven
-based data exporting device. The S0 interface converts the S0 current
-pulses into digital voltage pulses, which are logged via interrupts
-in the AVR Raven in order to count energy consumption and export this
-data to a collector via a poller script.\label{fig:meter-overview}}
-\end{figure}
-
-
 While counting these current pulses gives us a method of calculating
 the amount of energy consumed over a certain time period, digital
 systems are not capable of directly measuring current, and as a consequence
@@ -328,7 +315,18 @@ polling engines of applications like Nagios%
 
 \subsection{The Collector}
 
-% citation to node.JS added by Vaibhav
+\begin{figure}[t]
+\begin{centering}
+\includegraphics[scale=0.4]{images/s0-meter} 
+\par\end{centering}
+
+\caption{The S0 interface for the electricity meter along with the AVR Raven
+based data exporting device. The S0 interface converts the S0 current
+pulses into digital voltage pulses, which are logged via interrupts
+in the AVR Raven in order to count energy consumption and export this
+data to a collector via a poller script.\label{fig:meter-overview}}
+\end{figure}
+
 The WattsApp Collector was chosen to be written in Node.js \cite{nodejs:2010},
 which is an event driven, asynchronous I/O JavaScript environment
 based on Google's libv8 JavaScript engine. This choice was made, since
@@ -473,24 +471,12 @@ relationship between meters or devices.\label{fig:treemap-android}}
 \end{figure}
 
 
-\begin{figure}[t]
-\begin{centering}
-\includegraphics[scale=0.78]{images/mobile-graph} 
-\par\end{centering}
-
-\caption{The detailed graph mode, as shown by the Android application. Data
-displayed in this view can provide deeper insights into the energy
-consumption patterns.\label{fig:graph-android}}
-\end{figure}
-
-
 To give mobile users an opportunity to gather an insight into their
-telemetry data, a mobile application for Android%
-\footnote{https://market.android.com/details?id=de.jacobs.university.ads.wattsapp.activities%
-} was developed as a client for WattsApp. This mobile application provides
-a simple and intuitive way of viewing data (power consumption, water
-consumption, etc.) that is passed to it, as well as of modifying information
-related to meters that collect data.
+telemetry data, a mobile application for Android was developed as a client
+for WattsApp. This mobile application provides a simple and intuitive way of 
+viewing data (power consumption, water consumption, etc.) that is passed to 
+it, as well as of modifying information related to meters that collect data. This
+application has been made available in the Google Play store.
 
 The WattsApp application uses Facebook credentials in order to authenticate
 itself with the server that provides the data. It also uses a single
@@ -504,6 +490,16 @@ address of the user) must be accepted. After successful authentication
 the application stores the Facebook access token, the user ID and
 the time for which the token is valid since this data is used to support
 the Single Sign-On feature.
+
+\begin{figure}[t]
+\begin{centering}
+\includegraphics[scale=0.78]{images/mobile-graph} 
+\par\end{centering}
+
+\caption{The detailed graph mode, as shown by the Android application. Data
+displayed in this view can provide deeper insights into the energy
+consumption patterns.\label{fig:graph-android}}
+\end{figure}
 
 Authentication and permission levels are retrieved from the WattsApp
 server, i.e. the gatekeeper at the cloud server, by supplying to it
@@ -519,8 +515,8 @@ an edit button is presented in front of the appropriate meter. Pressing
 the edit button displays a meter configuration page, where the user
 can rename a meter or manually set its new location.
 
-\vskip 1.37cm
-\pagebreak
+%\vskip 1.37cm
+%\pagebreak
  
 A user may select multiple meters to display the data from
 by selecting the check boxes next to each meter. Data from meters can
@@ -600,3 +596,5 @@ in such energy monitoring applications.
 \bibliography{wattsapp-paper}
 
 \end{document}
+
+
